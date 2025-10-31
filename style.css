@@ -453,11 +453,6 @@ body {
     .cardHead {
         padding: 0;
     }
-    main > div {
-        padding: 0 !important; 
-        margin: 0 !important;
-        margin: auto !important;
-    }
     .containerCards, .cardsContainer{
         margin: 0;
         padding: 0.5rem 0;
