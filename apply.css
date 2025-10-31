@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 238);
+    font-family: ui-sans-serif, sans-serif;
+    overflow-x: hidden;
+    width: 100vw;
+    font-size: 1rem;
+}
+
+.mainContent >div,.applyDiv {
+    padding: 1rem 0;
+}
+main>div{
+    margin: 0 10vw;
+    border-top: 0.25px solid rgb(222, 222, 222);
+}
+.applyDiv >div{
+    border: none;
+    margin: 0;
+}
+.applyDiv{
+    margin: 0 10vw;
+    border-top: 1px solid rgb(222, 222, 222);
+}
+.navp2 {
+    margin-right: 3vw;
+}
+
+.applyDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.applyDiv h2 {
+    font-size: 2em;
+    font-weight: 200;
+    margin: 0.5em 0;
+    margin-top: 0;
+}
+
+.applyPart1 p {
+    font-size: 0.875em;
+    line-height: 1.25em;
+    font-weight: 200;
+    color: rgb(156, 163, 175);
+}
+
+
+.ApplyBtn2 button {
+    background-color: rgb(255, 102, 0);
+    color: white;
+    border: none;
+    border-radius: .25em;
+    font-weight: 700;
+    line-height: 1.5rem;
+    padding: 0.5em;
+    font-size: 1.125em;
+    cursor: pointer;
+}
+
+.ApplyBtn2 button:hover {
+    background-color: rgb(253, 169, 66);
+}
+
+.applyPart2 {
+    text-align: center;
+}
+
+.ApplyBtn2{
+    margin: 0.5em 0;
+}
+.applyPart2 p {
+    margin: 0.5em 0;
+    font-size: 1em;
+    font-weight: 200;
+    line-height: 1.5em;
+}
+.applyPart2 p a{
+    color: black;
+}
+
+
+.text{
+    padding: 1em 0;
+}
+
+.mainContent{
+    width: 40vw;
+}
+.mainContent p{
+    padding: 1em 0;
+}
+.mainContent{
+    font-size: 1em;
+    font-weight: 200;
+    line-height: 2em;
+}
+.text b{
+    font-weight: 600;
+}
+
+
+.text h3{
+    padding: 1em 0;
+    font-weight: 200;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+.text ol li{
+    padding: 0.5em 0;
+    margin-left: 2ex;
+}
+
+.text .ApplyBtn2{
+    padding-bottom: 1.5em;
+}
+
+
+
+.flexbox{
+    display: flex;
+    justify-content: space-between;
+}
+.fixBar{
+    position: sticky;
+    top: 1em;
+    margin: 2rem 0;
+    padding: 1em 3em;
+    background-color: #fff;
+    height: fit-content;
+    width: 20vw;
+}
+.fixBar p{
+    font-weight: 200;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+.fixBar ul li{
+    font-weight: 700;
+    font-size: 0.875em;
+    line-height: 0;
+    padding: 1em 0;
+    list-style-position: inside;
+}
+
+.applyBtnLast{
+    padding: 1rem 0 3em;
+    margin: 0 10vw;
+    border-bottom: 0.25px solid rgb(222, 222, 222);
+}
+
+
+@media (max-width: 900px) {
+    .fixBar {
+        display: none;
+    }
+
+    .mainContent{
+        width: 100vw;
+    }
+    .applyDiv{
+        display: block;        
+    }
+    .applyPart2 {
+        padding-top: 1.5rem;
+    }
+}
