@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y Combinator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav&footer.css">
+    <!-- <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAAEBCAMAAABPMuDPAAAAQlBMVEXyZSLyZSLyZSLyZSLyZSL6roH91br2ilD+6tr4nGn0eDf7wp3+9e3zbyz3k1z0gUP7uI/5pXX+38n8y6z////yZSKuMvVfAAAABXRSTlOAQMBgICelMzEAAAOgSURBVHhe5MABDQAAAIIw3eifmSB8vA3Zt5vcuGEgCsLeUBSpnxnb4f2vmn068xK5Z8FuFQ8gCB9q80Dw42Pc+3y8UQABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQACBR7GnuAF6MafNKnDsv+xx/+1mv3nOKjDKXwRWbwIWYJl4F6wigvclUCcWaCKCeRKwAtNFoBN4TC1wigjelMA2+S5YRATv+VyfXKC+NYIqEphVQEfgT2Dv0ws8VAT+BEqAXbCJCPwJHAEEuorAn0AAARGBO4H1CCFw7O+JoArIuQVGERH4EhgBBFQE/gQmF9ARnP4EljG5gB5Iiz+BGkBAreTqTyCAgIzAnUAogdMbwSIm0cQCeiAtvgR6MIEqInAkEEBARuBKIJzAwxOB5SsBb822n0dQxSoOJNBFBI4EAgmMp4jAkUAAATWQ6s8SaEFvz8vPIqhiWAYQcEQgEogqMD5FBBcS+BrBBPRAqtcTqIEF2vUIqsgmgIAjApFAaIF6NQKbwPcIKKAHUr2WQI8k4I+gilUcQMARgUggvEC/EkEzAM8E7wu2CxGsdhJFEvBH0MQqDiegV3J1JBBQ4NhFBDqBzyTvC4qIQCawjgwCOgKdQIstoFdydSQQRcD2rSNoVimRQPuPCFaLFF1AR7A5EggloK/BdAIZBPRVqE6ghxLwR7BaoBQCOgKdQDqBLiIQCSQSGJuIoNlJlEVAR3C8TKCkfHX7fLn+T5tASoFjf9X6YmlSCozyYvxVO4kSCegI1r8n0FIJ6IF0igQyCej9txiWZAI6gsfoViWxwPiy+2gzqzi1QLUR2ATSCeiBtBuSfAI6AjsWkguM738I9PQC3ZFADoGxKYC95xfQEZRxA4FRRALHLQSOXSSQXkBHsB75BXQEbWQV0APJruL8AmMVCaQW0BEsI5uAXsn21FsJVJFAZgH9juJmAsVOorsLlLsJIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAm3547QAAoGPFkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBH6XAwc0AAAAAME2+ncWxOXNAI6Cs14i3Db7AAAAAElFTkSuQmCC" type="image/x-icon"> -->
+</head>
+
+<body>
+
+    <header>
+        <!-- Top Message -->
+
+        <div class="topMsg">
+            <p>
+                Apply for the Winter 2026 Batch!
+                <button>Apply</button>
+            </p>
+        </div>
+
+        <!-- Nav Bar -->
+
+        <nav class="navBar">
+            <div class="navp1">
+                <div class="logo">
+                    <a href="./index.html"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAAEBCAMAAABPMuDPAAAAQlBMVEXyZSLyZSLyZSLyZSLyZSL6roH91br2ilD+6tr4nGn0eDf7wp3+9e3zbyz3k1z0gUP7uI/5pXX+38n8y6z////yZSKuMvVfAAAABXRSTlOAQMBgICelMzEAAAOgSURBVHhe5MABDQAAAIIw3eifmSB8vA3Zt5vcuGEgCsLeUBSpnxnb4f2vmn068xK5Z8FuFQ8gCB9q80Dw42Pc+3y8UQABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQACBR7GnuAF6MafNKnDsv+xx/+1mv3nOKjDKXwRWbwIWYJl4F6wigvclUCcWaCKCeRKwAtNFoBN4TC1wigjelMA2+S5YRATv+VyfXKC+NYIqEphVQEfgT2Dv0ws8VAT+BEqAXbCJCPwJHAEEuorAn0AAARGBO4H1CCFw7O+JoArIuQVGERH4EhgBBFQE/gQmF9ARnP4EljG5gB5Iiz+BGkBAreTqTyCAgIzAnUAogdMbwSIm0cQCeiAtvgR6MIEqInAkEEBARuBKIJzAwxOB5SsBb822n0dQxSoOJNBFBI4EAgmMp4jAkUAAATWQ6s8SaEFvz8vPIqhiWAYQcEQgEogqMD5FBBcS+BrBBPRAqtcTqIEF2vUIqsgmgIAjApFAaIF6NQKbwPcIKKAHUr2WQI8k4I+gilUcQMARgUggvEC/EkEzAM8E7wu2CxGsdhJFEvBH0MQqDiegV3J1JBBQ4NhFBDqBzyTvC4qIQCawjgwCOgKdQIstoFdydSQQRcD2rSNoVimRQPuPCFaLFF1AR7A5EggloK/BdAIZBPRVqE6ghxLwR7BaoBQCOgKdQDqBLiIQCSQSGJuIoNlJlEVAR3C8TKCkfHX7fLn+T5tASoFjf9X6YmlSCozyYvxVO4kSCegI1r8n0FIJ6IF0igQyCej9txiWZAI6gsfoViWxwPiy+2gzqzi1QLUR2ATSCeiBtBuSfAI6AjsWkguM738I9PQC3ZFADoGxKYC95xfQEZRxA4FRRALHLQSOXSSQXkBHsB75BXQEbWQV0APJruL8AmMVCaQW0BEsI5uAXsn21FsJVJFAZgH9juJmAsVOorsLlLsJIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAm3547QAAoGPFkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBH6XAwc0AAAAAME2+ncWxOXNAI6Cs14i3Db7AAAAAElFTkSuQmCC"
+                            alt="">
+                    </a>
+                </div>
+                <div class="navElements"><a href="">About </a></div>
+                <div class="navElements"><a href="">Companies </a></div>
+                <div class="navElements"><a href="">Startup Jobs </a></div>
+                <div class="navElements"><a href="">Find a Co-Founder </a></div>
+                <div class="navElements"><a href="">Library </a></div>
+                <div class="navElements"><a href="">SAFE </a></div>
+                <div class="navElements"><a href="">Resources </a></div>
+            </div>
+            <div class="navp2">
+                <p>Apply for <b>W2026</b> batch.</p>
+                <button class="ApplyBtn">Apply</button>
+            </div>
+
+            <div class="threeLine">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                    <path fill="#000" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z" />
+                </svg>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Containt -->
+
+    <main>
+        <div class="intro">
+            <div class="introText">
+                <div>
+                    <h1 class="compName">Y Combinator</h1>
+                </div>
+                <p>Make something people <br> want.</p>
+                <div class="ApplyBtn2">
+                    <button>Apply to YC</button>
+                </div>
+            </div>
+            <div class="introImg">
+                <img src="https://www.ycombinator.com/vite/assets/garry_and_sam-BDiyZpUw.webp" alt="">
+            </div>
+            <div class="fundedValuation">
+                <div class="funded centerBox">
+                    <h2>5,000</h2>
+                    <p>Funded Startups</p>
+                </div>
+                <div class="valuation centerBox">
+                    <h2>$800B</h2>
+                    <p>Combined Valuation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="topCompanies">
+            <h2>Top YC companies</h2>
+            <div class="companeyGrid">
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/240">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/stripe-d1d72c19fe7fbfd9514ffbc26f1c5922a1b77fd7445c78a34fe319c03b986713.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/271">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/airbnb-423deceb57ea913e2f3a39a1c2b6ecb690f019933b4d767ac91121777aa59107.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/468">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/instacart-81d147c59ca98d84b72f606de3af981da477423738120d3b2baec64c3162ba14.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/531">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/doordash-f41c839bb0522ead71e8d99ed3ae0495c04271f6f3f3edc6b0effbbff172bc1d.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/590">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/cruise-38dda623d4f317a49a65099cd460bd1c6b3e4b91ffeccb6df0ec02284345b338.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/383">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/twitch-1b4772b83a73b6fa827ef467ecc17023a2bfbbf936633bffb5e93674690e74d6.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/439">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/coinbase-5c8bfb41c875bb6163cebf467fe6afa1cbaf092c16ea7711034e32218965ff93.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/202">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/pagerduty-dc361aab31ef341eaed4d0a5a420c42f4d557745c67ffc5999c7b556c408d150.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1543">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/faire-3113845be6506be7761eaef7257e882b6e0c94081653c0f7459f8ed0c0596338.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1556">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/brex-a76f83603a430f266cddacaceaf525080d91c3febf04ea8000ae1b4c67e8786f.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/12064">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/deel-2eb5105300f66ebfa07b0ea805b6680d71c0b6de0272c3f75eebf6d2ae3077cf.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1451">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/rippling-100bc0c1cdabd9e38c671420ba16ba8f6d1af656dc3bc32eeeaa029f1bec257a.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/reddit-d5ed3340e70326e6a372be76e2ec1b761a4d757954ae69311671f82f59afbedb.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/24">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/gusto-b3f56f64a500a85cb44a2621db217778c9c698f83da59921e41c732dacdb3f35.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/595">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/flexport-ace3180f9926a45ed72eea63ed4c5a1a0aeb4e14ec7eb3ffff7c513aba07d0a9.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/325">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/dropbox-83b803aca663267bc2c480efca454ea8f9d31c39dd2ccba3856104a987e2692d.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/827">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/razorpay-7b4097215fa2d028e821d34bd3d1558309acd87ac5599e8164545e3a7fda5b95.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1294">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/scale_ai-09562d62f19867f7e4af006fb0003148d1f0dff4ad32fa23e283c98a88044443.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/810">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/gitlab-9998d8cb37a75de7004d679606bb8c5517d8c82848fb3e6ff13f8587143545b3.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/445">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/benchling-cabc6ab6f92c92af620210d56c5cb872d5a2b77d3244924a4b35c0fba03aa411.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/482">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/fivetran-80f044801357e31b679f1c6adb33cd674b80a6fba2eef509dcb930f57118d324.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1103">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/rappi-58eceb42cb4e6ba589842600cba0a0448e2ebe42a8ad4d0b9e26f1e6ccd9f36d.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/662">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/checkr-dfe048bab6c8869e0faa186c947e1f8ba70fe25468952d432d6730bc7c64b557.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/442">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/zapier-a571989e13599601b2555b75551ee1cee4161f77df939d8f9d99ef750d6c9851.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/13208">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/whatnot-44d4dfd2add836c788c42baa567fa4769b88f6e4da07d8f8eaf79d321b9be41c.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1042">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/podium-403d2cf6edcf8bd760845e1a356161d69df559a59aeda2e36bf90b0454d75c85.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/566">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/webflow-e0f324025f848a85519e046dfcffa3c517ad4470106e8ee54f697df16be929ce.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/22721">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/zepto-ed94889c5a2c2128ca2a39d5ce829a68cc792ed3e1b479089d2cbd3e03fa6483.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/1839">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/groww-b94b5a87bc987c7fa70ef04790d93b54fdca1d9edcf3d4d104865d740542fd4f.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/88">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/segment-bc64ab58b63ec0bdb1aa5888ca7771acabc39db12e9c30b4a5215014b766ffc4.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies/866">
+                        <img src="https://bookface-static.ycombinator.com/assets/ycdc/startups/ironclad-7ea21638879d20154e44f1614042b2fc93babefe9059a42835874975f73106d1.png"
+                            alt="">
+                    </a>
+                </div>
+                <div class="companey">
+                    <a href="https://www.ycombinator.com/companies">
+                        +
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="qwerty">
+            <div class="qwertyHead">
+                <span class="orangeColor">We help founders </span>make something people want and the results speak for
+                themselves.
+            </div>
+
+            <div class="gridContainer2">
+                <div class="qwertyText">
+                    We help founders at their earliest stages regardless of their age.
+                </div>
+                <div class="qwertyText">
+                    We improve the success rate of our startups.
+                </div>
+                <div class="qwertyText">
+                    We give startups a huge fundraising advantage.
+                </div>
+                <div class="qwertyText">
+                    Our companies have a track record of becoming billion dollar companies.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="successvdo">
+            <h2 class="head2">Our formula for <span class="orangeColor">success</span>.</h2>
+            <iframe class="ytbVideo" src="https://www.youtube.com/embed/EiRnSjcVIqk"
+                title="Inside The Most Powerful Startup Community In The World" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div class="cardsContainer">
+            <h2 class="head2 cardHead">
+                YC is <span class="orangeColor">run by startup founders</span> who have built exactly what they wanted
+                when starting and growing a startup.
+            </h2>
+
+            <div class="containerCards">
+                <div class="card">
+                    <div class="cardImg img1"></div>
+                    <h3>The most experienced partners</h3>
+                    <p>
+                        Each founder is assigned a dedicated YC partner who has mentored hundreds of YC companies. They have more data on what it takes to build a successful startup than any other early stage startup advisor. These partners read applications, interview companies, and mentor startups throughout the batch. You can access them in person, over email, and on Slack. 
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="cardImg img2"></div>
+                    <h3>Investor network</h3>
+                    <p>
+                        YC companies have raised $85 billion dollars from the best investors in the world. Our founders have access to the YC Investor Database which has profiles and reviews for more than 50,000 startup investors.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="cardImg img3"></div>
+                    <h3>Private social network only for founders</h3>
+                    <p>
+                        YC founders get to benefit from the collective wisdom of over 9000 YC alumni. They can access these alums through Bookface, our private social network. We have a forum for asking questions to the community, a founder directory for finding specific people who can provide advice and intros, and a company directory for finding potential customers.
+                    </p>
+                </div>
+                
+                <div class="card">
+                    <div class="cardImg img4"></div>
+                    <h3>Exclusive deals</h3>
+                    <p>
+                        YC founders have access to over 1000 deals from leading software companies. Every YC company gets free credits or significant discounts on hosting, banking, cap table management, back office, and much more. Companies report these deals to be worth in excess of $500,000.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="cardImg img5"></div>
+                    <h3>The best written advice</h3>
+                    <p>
+                        YC founders get to benefit from our collective experience funding 5000 companies across almost 20 years. We have extensive documentation for common questions about fundraising, go to market, sales, product market fit, mental health, hiring, and much more.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="cardImg img6"></div>
+                    <h3>Networks to build your team</h3>
+                    <p>
+                        Through <a href="https://workatastartup.com/">Work at a Startup</a> and <a href="https://news.ycombinator.com/jobs">HN</a>, we help our founders hire the small number of early engineers and other team members critical to finding product market fit. At any given time there are 150,000+ candidates searching for jobs at early stage YC companies.
+                    </p>
+                </div>                
+            </div>
+        </div>
+
+        <div class="founderInterst">
+            <h2 class="head2">
+                We put <span class="orangeColor">founders' interests</span> first.
+            </h2>
+            <ul class="figrid">
+                <li>We don’t take a board seat.</li>
+                <li>We don’t demand 20% of your company.</li>
+                <li>We don’t take weeks/months to decide to invest</li>
+                <li>We don’t charge fees.</li>
+                <li>We don’t require decks, business plans, or MBAs.</li>
+                <li>We don't tell you what to do. We only offer advice.</li>
+            </ul>
+            <div class="fiImgs">
+                <div class="fiImg fiImg1"></div>
+                <div class="fiImg fiImg2"></div>
+                <div class="fiImg fiImg3"></div>
+            </div>
+        </div>
+
+        <div class="learnMore">
+            <h2 class="head2">Want to learn more?</h2>
+            <div class="learnMoreGrid">
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>YC Library</h3>
+                        <p>Videos, podcasts, and essays for startup founders</p>
+                    </div>
+                    <div class="moreCardImg mci1"></div>
+                </div>
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>Newsletter</h3>
+                        <p>Keep up with the latest news, launches, jobs, and events from the YC community</p>
+                    </div>
+                    <div class="moreCardImg mci2"></div>
+                </div>
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>Launch YC</h3>
+                        <p>Discover new YC companies and products</p>
+                    </div>
+                    <div class="moreCardImg mci3"></div>
+                </div>
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>Work at a Startup</h3>
+                        <p>Find your next role at a YC startup</p>
+                    </div>
+                    <div class="moreCardImg mci4"></div>
+                </div>
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>Blog</h3>
+                        <p>Essays, events, and announcements from YC</p>
+                    </div>
+                    <div class="moreCardImg mci5"></div>
+                </div>
+                <div class="moreCard">
+                    <div class="moreCardText">
+                        <h3>Co-Founder Matching</h3>
+                        <p>Meet a potential co-founder to start a startup with</p>
+                    </div>
+                    <div class="moreCardImg mci6"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+
+    <!-- footer -->
+
+    <footer class="bigScreenNav">
+        <div class="footer">
+            <div class="logo">
+                <a href="./index.html"><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAAEBCAMAAABPMuDPAAAAQlBMVEXyZSLyZSLyZSLyZSLyZSL6roH91br2ilD+6tr4nGn0eDf7wp3+9e3zbyz3k1z0gUP7uI/5pXX+38n8y6z////yZSKuMvVfAAAABXRSTlOAQMBgICelMzEAAAOgSURBVHhe5MABDQAAAIIw3eifmSB8vA3Zt5vcuGEgCsLeUBSpnxnb4f2vmn068xK5Z8FuFQ8gCB9q80Dw42Pc+3y8UQABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQACBR7GnuAF6MafNKnDsv+xx/+1mv3nOKjDKXwRWbwIWYJl4F6wigvclUCcWaCKCeRKwAtNFoBN4TC1wigjelMA2+S5YRATv+VyfXKC+NYIqEphVQEfgT2Dv0ws8VAT+BEqAXbCJCPwJHAEEuorAn0AAARGBO4H1CCFw7O+JoArIuQVGERH4EhgBBFQE/gQmF9ARnP4EljG5gB5Iiz+BGkBAreTqTyCAgIzAnUAogdMbwSIm0cQCeiAtvgR6MIEqInAkEEBARuBKIJzAwxOB5SsBb822n0dQxSoOJNBFBI4EAgmMp4jAkUAAATWQ6s8SaEFvz8vPIqhiWAYQcEQgEogqMD5FBBcS+BrBBPRAqtcTqIEF2vUIqsgmgIAjApFAaIF6NQKbwPcIKKAHUr2WQI8k4I+gilUcQMARgUggvEC/EkEzAM8E7wu2CxGsdhJFEvBH0MQqDiegV3J1JBBQ4NhFBDqBzyTvC4qIQCawjgwCOgKdQIstoFdydSQQRcD2rSNoVimRQPuPCFaLFF1AR7A5EggloK/BdAIZBPRVqE6ghxLwR7BaoBQCOgKdQDqBLiIQCSQSGJuIoNlJlEVAR3C8TKCkfHX7fLn+T5tASoFjf9X6YmlSCozyYvxVO4kSCegI1r8n0FIJ6IF0igQyCej9txiWZAI6gsfoViWxwPiy+2gzqzi1QLUR2ATSCeiBtBuSfAI6AjsWkguM738I9PQC3ZFADoGxKYC95xfQEZRxA4FRRALHLQSOXSSQXkBHsB75BXQEbWQV0APJruL8AmMVCaQW0BEsI5uAXsn21FsJVJFAZgH9juJmAsVOorsLlLsJIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAm3547QAAoGPFkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBH6XAwc0AAAAAME2+ncWxOXNAI6Cs14i3Db7AAAAAElFTkSuQmCC"
+                        alt="">
+                </a>
+            </div>
+            <div>
+                <div class="navHead">Programs</div>
+                <div> <a href=""> YC Program </a></div>
+                <div> <a href=""> Startup School</a></div>
+                <div> <a href=""> Work at a Startup</a></div>
+                <div> <a href=""> Co-Founder Matching</a></div>
+            </div>
+
+            <div>
+                <div class="navHead">Company</div>
+                <div> <a href=""> YC Blog </a></div>
+                <div> <a href=""> Contact </a></div>
+                <div> <a href=""> Press </a></div>
+                <div> <a href=""> People </a></div>
+                <div> <a href=""> Careers </a></div>
+                <div> <a href=""> Privacy Policy </a></div>
+                <div> <a href=""> Notice at Collection </a></div>
+                <div> <a href=""> Security </a></div>
+                <div> <a href=""> Terms of Use </a></div>
+            </div>
+
+            <div>
+                <div class="navHead">Resources</div>
+                <div> <a href=""> Startup Directory </a></div>
+                <div> <a href=""> Startup Library </a></div>
+                <div> <a href=""> Investors </a></div>
+                <div> <a href=""> SAFE </a></div>
+                <div> <a href=""> Hacker News </a></div>
+                <div> <a href=""> Launch YC </a></div>
+                <div> <a href=""> YC Deals </a></div>
+            </div>
+
+            <div class="footerLast">
+                <div>
+                    <p>Make something people want.</p>
+                    <button class="ApplyBtn">Apply</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="lastFooter">
+            <p>© 2025 Y Combinator</p>
+            <div class="socialMedia">
+                <a href="https://twitter.com/ycombinator">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                        <path fill="#000"
+                            d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.2 4.2 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.52 8.52 0 0 1-5.33 1.84q-.51 0-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23" />
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/YCombinator/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                        <path fill="#000"
+                            d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95" />
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/ycombinator">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                        <path fill="#000"
+                            d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/school/y-combinator/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                        <path fill="#000"
+                            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z" />
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/c/ycombinator">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                        <path fill="#000"
+                            d="m10 15l5.19-3L10 9zm11.56-7.83c.13.47.22 1.1.28 1.9c.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83c-.25.9-.83 1.48-1.73 1.73c-.47.13-1.33.22-2.65.28c-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44c-.9-.25-1.48-.83-1.73-1.73c-.13-.47-.22-1.1-.28-1.9c-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83c.25-.9.83-1.48 1.73-1.73c.47-.13 1.33-.22 2.65-.28c1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44c.9.25 1.48.83 1.73 1.73" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </footer>
+
+
+    <footer class="smallScreenNav">
+        <div class="logo">
+            <a href="./index.html"><img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQEAAAEBCAMAAABPMuDPAAAAQlBMVEXyZSLyZSLyZSLyZSLyZSL6roH91br2ilD+6tr4nGn0eDf7wp3+9e3zbyz3k1z0gUP7uI/5pXX+38n8y6z////yZSKuMvVfAAAABXRSTlOAQMBgICelMzEAAAOgSURBVHhe5MABDQAAAIIw3eifmSB8vA3Zt5vcuGEgCsLeUBSpnxnb4f2vmn068xK5Z8FuFQ8gCB9q80Dw42Pc+3y8UQABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQACBR7GnuAF6MafNKnDsv+xx/+1mv3nOKjDKXwRWbwIWYJl4F6wigvclUCcWaCKCeRKwAtNFoBN4TC1wigjelMA2+S5YRATv+VyfXKC+NYIqEphVQEfgT2Dv0ws8VAT+BEqAXbCJCPwJHAEEuorAn0AAARGBO4H1CCFw7O+JoArIuQVGERH4EhgBBFQE/gQmF9ARnP4EljG5gB5Iiz+BGkBAreTqTyCAgIzAnUAogdMbwSIm0cQCeiAtvgR6MIEqInAkEEBARuBKIJzAwxOB5SsBb822n0dQxSoOJNBFBI4EAgmMp4jAkUAAATWQ6s8SaEFvz8vPIqhiWAYQcEQgEogqMD5FBBcS+BrBBPRAqtcTqIEF2vUIqsgmgIAjApFAaIF6NQKbwPcIKKAHUr2WQI8k4I+gilUcQMARgUggvEC/EkEzAM8E7wu2CxGsdhJFEvBH0MQqDiegV3J1JBBQ4NhFBDqBzyTvC4qIQCawjgwCOgKdQIstoFdydSQQRcD2rSNoVimRQPuPCFaLFF1AR7A5EggloK/BdAIZBPRVqE6ghxLwR7BaoBQCOgKdQDqBLiIQCSQSGJuIoNlJlEVAR3C8TKCkfHX7fLn+T5tASoFjf9X6YmlSCozyYvxVO4kSCegI1r8n0FIJ6IF0igQyCej9txiWZAI6gsfoViWxwPiy+2gzqzi1QLUR2ATSCeiBtBuSfAI6AjsWkguM738I9PQC3ZFADoGxKYC95xfQEZRxA4FRRALHLQSOXSSQXkBHsB75BXQEbWQV0APJruL8AmMVCaQW0BEsI5uAXsn21FsJVJFAZgH9juJmAsVOorsLlLsJIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAggggAACCCCAAAIIIIAAAm3547QAAoGPFkAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBH6XAwc0AAAAAME2+ncWxOXNAI6Cs14i3Db7AAAAAElFTkSuQmCC"
+                    alt="">
+            </a>
+        </div>
+        <div class="footer">
+            <div>
+                <div class="navHead">Programs</div>
+                <div> <a href=""> YC Program </a></div>
+                <div> <a href=""> Startup School</a></div>
+                <div> <a href=""> Work at a Startup</a></div>
+                <div> <a href=""> Co-Founder Matching</a></div>
+            </div>
+
+            <div>
+                <div class="navHead">Company</div>
+                <div> <a href=""> YC Blog </a></div>
+                <div> <a href=""> Contact </a></div>
+                <div> <a href=""> Press </a></div>
+                <div> <a href=""> People </a></div>
+                <div> <a href=""> Careers </a></div>
+                <div> <a href=""> Privacy Policy </a></div>
+                <div> <a href=""> Notice at Collection </a></div>
+                <div> <a href=""> Security </a></div>
+                <div> <a href=""> Terms of Use </a></div>
+            </div>
+
+            <div>
+                <div class="navHead">Resources</div>
+                <div> <a href=""> Startup Directory </a></div>
+                <div> <a href=""> Startup Library </a></div>
+                <div> <a href=""> Investors </a></div>
+                <div> <a href=""> SAFE </a></div>
+                <div> <a href=""> Hacker News </a></div>
+                <div> <a href=""> Launch YC </a></div>
+                <div> <a href=""> YC Deals </a></div>
+            </div>
+
+        </div>
+        <div class="footerLast">
+            <div>
+                <p>Make something people want.</p>
+                <button class="ApplyBtn">Apply</button>
+            </div>
+        </div>
+        <hr>
+        <div class="lastFooter">
+            <p>© 2025 Y Combinator</p>
+        </div>
+        <div class="socialMedia">
+            <a href="https://twitter.com/ycombinator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                    <path fill="#000"
+                        d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.2 4.2 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.52 8.52 0 0 1-5.33 1.84q-.51 0-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23" />
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/YCombinator/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                    <path fill="#000"
+                        d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95" />
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/ycombinator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                    <path fill="#000"
+                        d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3" />
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/school/y-combinator/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                    <path fill="#000"
+                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z" />
+                </svg>
+            </a>
+            <a href="https://www.youtube.com/c/ycombinator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.75em" height="1.75em" viewBox="0 0 24 24">
+                    <path fill="#000"
+                        d="m10 15l5.19-3L10 9zm11.56-7.83c.13.47.22 1.1.28 1.9c.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83c-.25.9-.83 1.48-1.73 1.73c-.47.13-1.33.22-2.65.28c-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44c-.9-.25-1.48-.83-1.73-1.73c-.13-.47-.22-1.1-.28-1.9c-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83c.25-.9.83-1.48 1.73-1.73c.47-.13 1.33-.22 2.65-.28c1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44c.9.25 1.48.83 1.73 1.73" />
+                </svg>
+            </a>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

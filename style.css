@@ -1,0 +1,457 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 238);
+    font-family: ui-sans-serif, sans-serif;
+    overflow-x: hidden;
+    width: 100vw;
+}
+
+/* Main Section */
+
+.intro {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10vw;
+    position: relative;
+}
+
+.compName {
+    font-size: 3.75em;
+    font-weight: 600;
+    color: rgb(251, 101, 30);
+}
+
+.introText p {
+    font-size: 1.5em;
+    line-height: 2em;
+}
+
+.ApplyBtn2 button {
+    background-color: rgb(255, 102, 0);
+    color: white;
+    border: none;
+    border-radius: .25em;
+    font-weight: 700;
+    line-height: 1.5rem;
+    padding: 0.5em;
+    font-size: 1.125em;
+    cursor: pointer;
+}
+
+.ApplyBtn2 button:hover {
+    background-color: rgb(253, 169, 66);
+}
+
+.introImg img {
+    width: 45vw;
+}
+
+.fundedValuation {
+    position: absolute;
+    left: 48%;
+}
+
+.centerBox {
+    padding: 2.25rem;
+    background-color: rgb(245, 245, 238);
+    text-align: center;
+    border-radius: 1em;
+    margin: 3em 0;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / .1), 0 4px 6px -4px rgb(0 0 0 / .1);
+    font-size: 1rem;
+}
+
+.centerBox h2 {
+    font-weight: 700;
+    font-size: 2.25em;
+    list-style: 2.5em;
+    color: rgb(251, 101, 30);
+}
+
+.centerBox p {
+    font-weight: 200;
+    line-height: 1.5em;
+}
+
+
+/* Top Compnies */
+
+.companeyGrid {
+    padding: 3rem 10vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.topCompanies h2 {
+    text-align: center;
+    padding: 3rem 0 0;
+    font-weight: 500;
+    font-size: 1.875em;
+    line-height: 2.25rem;
+}
+
+.companey {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1em .2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8.4vw;
+}
+
+.companey a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.companey a img {
+    width: 7vw;
+}
+
+
+
+.qwerty {
+    background-color: #fff;
+    padding: 3em 10vw;
+}
+
+.qwertyHead {
+    text-align: center;
+    padding: 3rem;
+    font-weight: 500;
+    font-size: 1.875em;
+    line-height: 2.8rem;
+    margin: auto;
+    width: 35vw;
+}
+
+.orangeColor {
+    color: rgb(251, 101, 30);
+}
+
+.gridContainer2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+}
+
+.qwertyText {
+    font-size: 1.125rem;
+    line-height: 1.5em;
+    font-weight: 500;
+    width: 12vw;
+    border-left: 5px solid rgb(251, 101, 30);
+    padding-left: 1em;
+}
+
+
+.head2 {
+    font-weight: 500;
+    font-size: 1.875em;
+    line-height: 2.25rem;
+    padding: 0 0 3rem 0;
+}
+
+.successvdo {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.ytbVideo {
+    width: 672px;
+    height: 378px;
+}
+
+
+
+.cardsContainer {
+    padding: 4em 10vw;
+    text-align: center;
+    background-color: #fff;
+}
+
+
+.cardHead {
+    padding: 0 18vw;
+}
+
+.containerCards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin: 2rem 0;
+}
+
+.card {
+    width: 32vw;
+    background-color: rgb(245, 245, 238);
+    border-radius: 5px;
+    padding: 2rem;
+    text-align: start;
+}
+
+.cardImg {
+    width: 100%;
+    height: 35vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.card a {
+    color: black;
+}
+
+.card h3 {
+    font-weight: 550;
+    line-height: 1em;
+    font-size: 1rem;
+    border-left: 5px solid rgb(251, 101, 30);
+    margin: 1em 0;
+    padding: 0 5px;
+}
+
+.card p {
+    font-weight: 200;
+    line-height: 1.5em;
+}
+
+.img1 {
+    background-image: url('https://www.ycombinator.com/vite/assets/most-experienced-partners-DX4ZPbr4.jpg');
+}
+
+.img2 {
+    background-image: url('https://www.ycombinator.com/vite/assets/investor-network-DsrGWUIM.jpg');
+}
+
+.img3 {
+    background-image: url('	https://www.ycombinator.com/vite/assets/private-social-network-DAUtdNFy.jpg');
+}
+
+.img4 {
+    background-image: url('	https://www.ycombinator.com/vite/assets/exclusive-deals-DZOi8DL7.jpg');
+}
+
+.img5 {
+    background-image: url('	https://www.ycombinator.com/vite/assets/secret-handbook-BLok8-bB.jpg');
+}
+
+.img6 {
+    background-image: url('https://www.ycombinator.com/vite/assets/capital-after-batch-DQmLQXDH.jpg');
+}
+
+
+
+
+.founderInterst {
+    padding: 3rem 10vw;
+}
+
+.founderInterst h2 {
+    text-align: center;
+}
+
+
+.figrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+}
+
+.figrid li {
+    margin: 1rem 0;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5em;
+    list-style-type: none;
+}
+
+.figrid li::before {
+    font-size: 1.3em;
+    content: "\2666";
+    color: rgb(251, 101, 30);
+    padding-right: 0.5rem;
+}
+
+.fiImgs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fiImg {
+    width: 32%;
+    height: 30vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.fiImg1 {
+    background-image: url("	https://www.ycombinator.com/vite/assets/Left-BiSNksVM.jpg");
+}
+
+.fiImg2 {
+    background-image: url("	https://www.ycombinator.com/vite/assets/Middle-ORNvunn1.jpg");
+}
+
+.fiImg3 {
+    background-image: url("https://www.ycombinator.com/vite/assets/Right-CEqBBFo3.jpg");
+}
+
+
+
+.learnMore {
+    padding: 3rem 10vw;
+    background-color: #fff;
+}
+
+.learnMore h2 {
+    text-align: center;
+}
+
+.learnMoreGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.moreCard {
+    display: flex;
+    justify-content: space-between;
+    width: 25vw;
+    margin: 2em 0;
+}
+.moreCardText{
+    width: 60%;
+}
+.moreCardText h3 {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5em;
+}
+
+.moreCardText p {
+    font-weight: 200;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.moreCardImg {
+    margin-left: 1rem;
+    height: 95px;
+    width: 95px;
+    border-radius: .5rem;
+    background-size: contain;
+}
+
+.mci1 {
+    background-image: url("https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-library.jpg");
+}
+.mci2{
+    background-image: url("https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-newsletter.jpg");
+}
+.mci3 {
+    background-image: url("	https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-launch-yc.jpg");
+}
+.mci4 {
+    background-image: url("https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-waas.jpg");
+}
+.mci5 {
+    background-image: url("	https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-blog.jpg");
+}
+.mci6 {
+    background-image: url("https://yc-website.s3.us-west-2.amazonaws.com/why-yc/learn-more-events.jpg");
+}
+
+
+
+
+@media (max-width: 900px) {
+
+    .introImg,
+    .fundedValuation {
+        display: none;
+    }
+
+    .intro {
+        padding-left: 0;
+        padding: 3rem 0;
+    }
+
+    .intro {
+        justify-content: center;
+    }
+
+    .compName {
+        font-size: 3em;
+    }
+
+    .gridContainer2 {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .ytbVideo {
+        width: 80vw;
+        height: 45vw;
+    }
+
+    .qwertyText {
+        width: 80vw;
+    }
+
+    .figrid {
+        grid-template-columns: 1fr;
+    }
+    .learnMoreGrid{
+        display: block;
+    }
+
+    .moreCard{
+        width: 80vw;
+    }
+}
+
+@media(max-width: 800px) {
+    .containerCards {
+        display: block;
+    }
+
+    .card {
+        width: 80vw;
+        margin: 2rem 0;
+    }
+
+    .fiImg {
+        display: none;
+    }
+}
+
+@media (orientation: portrait) {
+    .gridContainer2 {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    .qwertyHead {
+        margin: 2em 0;
+        padding: 0;
+        width: 80vw;
+    }
+
+    .cardHead {
+        padding: 0;
+    }
+
+}
