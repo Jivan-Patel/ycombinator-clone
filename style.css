@@ -85,9 +85,9 @@ body {
 
 .companeyGrid {
     padding: 3rem 10vw;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    gap: 1rem 0.5rem;
 }
 
 .topCompanies h2 {
@@ -105,7 +105,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 8.4vw;
 }
 
 .companey a {
@@ -377,6 +376,7 @@ body {
 
 
 
+
 @media (max-width: 900px) {
 
     .introImg,
@@ -396,7 +396,11 @@ body {
     .compName {
         font-size: 3em;
     }
+    .companeyGrid{
+        grid-template-columns: repeat(6,1fr);
+    }
 
+    
     .gridContainer2 {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(4, 1fr);
@@ -435,7 +439,12 @@ body {
 
     .fiImg {
         display: none;
+    } 
+    
+    .companeyGrid{
+        grid-template-columns: repeat(4,1fr);
     }
+
 }
 
 @media (orientation: portrait) {
@@ -443,6 +452,7 @@ body {
         grid-row: 1;
         grid-column: 1;
     }
+
 
     .qwertyHead {
         margin: 2em 0;
@@ -461,5 +471,10 @@ body {
         margin: 1rem auto;
         width: 75vw;
     }
-
+     .companeyGrid{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .head2{
+        padding: 2rem;
+    }
 }
