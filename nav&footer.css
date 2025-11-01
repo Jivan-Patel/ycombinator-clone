@@ -105,6 +105,7 @@ footer {
     padding: 3em 10vw;
 }
 
+
 .footer {
     line-height: 1.25em;
     display: flex;
@@ -154,6 +155,7 @@ hr {
     justify-content: space-between;
 }
 
+
 .socialMedia a {
     text-decoration: none;
     padding: .5em;
@@ -166,6 +168,7 @@ hr {
 
 .ApplyBtn a{
     color: #fff;
+    text-decoration: none;
 }
 
 @media (max-width: 1000px) {
@@ -186,13 +189,31 @@ hr {
     .threeLine {
         display: block;
     }
+    .footerLast{
+        padding-left: 0;
+        margin-left: 0;
+    }
 
 }
+@media(max-width: 700px){
+    footer{
+        padding: 3em 0;
+    }   
+}
+
+@media(max-width: 600px) {
+    .footer {
+        display: block;
+    }
+
+    .footerLast {
+        justify-content: start;
+        margin: 1em 0;
+    }
+}
+
 
 @media (orientation: portrait) {
-    .bigScreenNav {
-        display: none;
-    }
 
     .smallScreenNav {
         display: block;
@@ -214,15 +235,7 @@ hr {
     .socialMedia {
         margin-top: 1rem;
     }
-}
-
-@media(max-width: 600px) {
-    .footer {
-        display: block;
-    }
-
-    .footerLast {
-        justify-content: start;
-        margin: 1em 0;
-    }
+    footer{
+        padding: 3em 10vw;
+    }  
 }
